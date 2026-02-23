@@ -143,7 +143,7 @@ export default function InterventionsPage() {
 
                         <div className="bg-amber-50/50 rounded-2xl p-6 mb-8 border border-amber-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <Building2 className="w-5 h-5 text-amber-500" />
+                                <img src="/tihcl.jpeg" alt="TIHCL" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
                                     <p className="text-slate-800 font-medium">Telangana Industrial Health Clinic (TIHCL)</p>
@@ -273,10 +273,13 @@ export default function InterventionsPage() {
 
                         <div className="bg-indigo-50/50 rounded-2xl p-6 mb-8 border border-indigo-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <Briefcase className="w-5 h-5 text-indigo-500" />
+                                <div className="flex -space-x-2">
+                                    <img src="/CITD.jpeg" alt="CITD" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1 relative z-10" />
+                                    <img src="/cipet.jpeg" alt="CIPET" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1 relative z-0" />
+                                </div>
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
-                                    <p className="text-slate-800 font-medium">Central Institute of Petrochemicals Engineering & Technology (CIPET)</p>
+                                    <p className="text-slate-800 font-medium">Central Institute of Petrochemicals Engineering & Technology (CIPET) / CITD</p>
                                 </div>
                             </div>
                         </div>
@@ -387,7 +390,7 @@ export default function InterventionsPage() {
 
                         <div className="bg-orange-50/50 rounded-2xl p-6 mb-8 border border-orange-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <Building2 className="w-5 h-5 text-orange-500" />
+                                <img src="/ni-msme.jpeg" alt="NiMSME" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
                                     <p className="text-slate-800 font-medium">National Institute for MSME (NiMSME)</p>
@@ -608,14 +611,13 @@ export default function InterventionsPage() {
                                 <Leaf className="w-8 h-8" />
                             </div>
                             <div>
-                                <h2 className="text-sm font-bold text-emerald-600 uppercase tracking-widest mb-1">Project 6a & 6b</h2>
                                 <h3 className="text-3xl font-black text-slate-900">Energy Efficiency & Greening MSMEs</h3>
                             </div>
                         </div>
 
                         <div className="bg-emerald-50/50 rounded-2xl p-6 mb-8 border border-emerald-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <Building2 className="w-5 h-5 text-emerald-500" />
+                                <img src="/rich.jpeg" alt="RICH" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
                                     <p className="text-slate-800 font-medium">Research and Innovation Circle Hyderabad (RICH)</p>
@@ -624,12 +626,12 @@ export default function InterventionsPage() {
                         </div>
 
                         <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed mb-10 space-y-4">
-                            <h4 className="text-xl font-bold text-slate-900">Project 6a: Mapping of Energy Intensive MSME Clusters</h4>
+                            <h4 className="text-xl font-bold text-slate-900">Mapping of Energy Intensive MSME Clusters</h4>
                             <p>
                                 This project aims to enhance energy efficiency among MSMEs in Telangana by mapping energy-intensive clusters and identifying opportunities for green technology adoption. The initiative will reduce operational costs, improve environmental sustainability, and support policy formulation through data-driven insights. Phase I collects baseline data from DISCOMs, Phase II charts energy intensity (kWh/ton), and Phase III prepares policy insights.
                             </p>
 
-                            <h4 className="text-xl font-bold text-slate-900 mt-8">Project 6b: Green Pioneer Support Program</h4>
+                            <h4 className="text-xl font-bold text-slate-900 mt-8">Green Pioneer Support Program</h4>
                             <p>
                                 Building on the energy mapping, the Green Pioneer initiative will empower over 2,000 MSMEs to transition to low-carbon operations, improve resource efficiency, and enhance climate-resilience.
                             </p>
@@ -694,7 +696,7 @@ export default function InterventionsPage() {
 
                         <div className="bg-fuchsia-50/50 rounded-2xl p-6 mb-8 border border-fuchsia-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <Building2 className="w-5 h-5 text-fuchsia-500" />
+                                <img src="/we-hub.jpeg" alt="WE HUB" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
                                     <p className="text-slate-800 font-medium">WE HUB</p>

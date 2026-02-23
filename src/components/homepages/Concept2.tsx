@@ -52,7 +52,7 @@ function useCountUp(end: number, duration: number = 2000, inView: boolean) {
 }
 
 /* ──────────────────── Stat Counter Component ──────────────────── */
-function StatBlock({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
+function StatBlock({ value, suffix, label, delay, icon: Icon }: { value: number; suffix: string; label: string; delay: number; icon?: React.ElementType }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     const count = useCountUp(value, 2200, isInView);
@@ -63,10 +63,15 @@ function StatBlock({ value, suffix, label, delay }: { value: number; suffix: str
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay }}
-            className="text-center group"
+            className="text-center group flex flex-col items-center"
         >
-            <div className="text-5xl md:text-6xl font-black text-white mb-3 tracking-tight">
-                {count.toLocaleString()}<span className="text-amber-400">{suffix}</span>
+            {Icon && (
+                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4 text-emerald-400 group-hover:scale-110 transition-transform group-hover:bg-emerald-400/20">
+                    <Icon className="w-6 h-6" strokeWidth={2} />
+                </div>
+            )}
+            <div className="text-5xl md:text-6xl font-black text-white mb-3 tracking-tight flex items-center gap-1 leading-none">
+                <span>{count.toLocaleString()}</span><span className="text-amber-400">{suffix}</span>
             </div>
             <div className="text-sm font-semibold text-blue-200 uppercase tracking-widest">{label}</div>
         </motion.div>
@@ -382,10 +387,10 @@ export default function Concept2() {
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-                        <StatBlock value={2600000} suffix="+" label="MSMEs in Telangana" delay={0} />
-                        <StatBlock value={4000000} suffix="+" label="Jobs Supported" delay={0.15} />
-                        <StatBlock value={33} suffix="" label="District Enterprise Centres" delay={0.3} />
-                        <StatBlock value={2000} suffix="+" label="MSMEs for Green Tech" delay={0.45} />
+                        <StatBlock value={2600000} suffix="+" label="MSMEs in Telangana" delay={0} icon={Building2} />
+                        <StatBlock value={4000000} suffix="+" label="Jobs Supported" delay={0.15} icon={Users} />
+                        <StatBlock value={33} suffix="" label="District Enterprise Centres" delay={0.3} icon={MapPin} />
+                        <StatBlock value={2000} suffix="+" label="MSMEs for Green Tech" delay={0.45} icon={Leaf} />
                     </div>
                 </div>
             </section>
@@ -462,9 +467,12 @@ export default function Concept2() {
                                 ))}
                             </div>
 
-                            <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-900/40 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center">
+                            <button
+                                onClick={() => window.location.href = '/dashboard'}
+                                className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-900/40 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center"
+                            >
                                 Explore Dashboard
-                                <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </motion.div>
 

@@ -11,29 +11,39 @@ export default function Footer() {
                             <img src="/ramp.jpg" alt="Govt Logo" className="w-12 h-12 bg-white rounded-lg p-1" />
                             <h2 className="text-2xl font-black text-white">RAMP Telangana</h2>
                         </div>
-                        <p className="text-slate-500 max-w-sm mb-6">Raising and Accelerating MSME Performance. Empowering Telangana's industrial future.</p>
-                        <div className="flex gap-4">
-                            <a href="mailto:contact@ramp.telangana.gov.in" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition text-white"><Mail className="w-4 h-4" /></a>
-                            <a href="tel:1800-123-4567" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition text-white"><Phone className="w-4 h-4" /></a>
+                        <div className="space-y-4 text-slate-500">
+                            <p className="max-w-sm">Raising and Accelerating MSME Performance. Empowering Telangana's industrial future.</p>
+                            <div className="flex flex-col gap-2 text-sm">
+                                <p className="text-white font-semibold">State Project Implementing Unit (SPIU)</p>
+                                <p>Directorate of Industries</p>
+                                <p>Chirag Ali Lane, Abids</p>
+                                <p>Hyderabad – 500001</p>
+                                <p>Telangana, India</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4 mt-6">
+                            <a href="mailto:contact@ramp.telangana.gov.in" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-emerald-600 transition text-white shadow-lg"><Mail className="w-4 h-4" /></a>
+                            <a href="tel:1800-123-4567" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-emerald-600 transition text-white shadow-lg"><Phone className="w-4 h-4" /></a>
                         </div>
                     </div>
 
                     <div>
                         <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
                         <ul className="space-y-2">
-                            <li><a href="/about" className="hover:text-blue-400 transition">About RAMP</a></li>
-                            <li><a href="/interventions" className="hover:text-blue-400 transition">Interventions</a></li>
-                            <li><a href="/schemes" className="hover:text-blue-400 transition">Schemes</a></li>
-                            <li><a href="/resources" className="hover:text-blue-400 transition">Resources</a></li>
+                            <li><a href="/about" className="hover:text-emerald-400 transition">About RAMP</a></li>
+                            <li><a href="/interventions" className="hover:text-emerald-400 transition">Interventions</a></li>
+                            <li><a href="/schemes" className="hover:text-emerald-400 transition">Schemes</a></li>
+                            <li><a href="/resources" className="hover:text-emerald-400 transition">Resources</a></li>
+                            <li><a href="/contact" className="hover:text-emerald-400 transition">Contact Us</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Legal</h4>
                         <ul className="space-y-2">
-                            <li><a href="#" className="hover:text-blue-400 transition">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition">Terms of Use</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition">Accessibility</a></li>
+                            <li><a href="#" className="hover:text-emerald-400 transition">Privacy Policy</a></li>
+                            <li><a href="#" className="hover:text-emerald-400 transition">Terms of Use</a></li>
+                            <li><a href="#" className="hover:text-emerald-400 transition">Accessibility</a></li>
                         </ul>
                     </div>
                 </div>

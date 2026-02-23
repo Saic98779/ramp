@@ -30,12 +30,17 @@ function useCountUp(end: number, duration: number = 2000, inView: boolean) {
     return count;
 }
 
-function StatBlock({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
+function StatBlock({ value, suffix, label, delay, icon: Icon }: { value: number; suffix: string; label: string; delay: number; icon?: React.ElementType }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     const count = useCountUp(value, 2200, isInView);
     return (
-        <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay }} className="text-center group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all">
+        <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay }} className="text-center group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center">
+            {Icon && (
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Icon className="w-6 h-6" strokeWidth={2} />
+                </div>
+            )}
             <div className="text-5xl md:text-6xl font-black text-blue-900 mb-3 tracking-tight">
                 {count.toLocaleString()}<span className="text-emerald-500">{suffix}</span>
             </div>
@@ -45,41 +50,7 @@ function StatBlock({ value, suffix, label, delay }: { value: number; suffix: str
 }
 
 /* --- Data --- */
-const interventions = [
-    { id: "database", title: "Consolidated MSME DB", desc: "Unified MSME Intelligence Hub for real-time visual dashboards and insights.", icon: BarChart3, agency: "Directorate of Industries", color: "from-blue-500 to-blue-600", bgLight: "bg-blue-50", textColor: "text-blue-600" },
-    { id: "edc", title: "Setting up of Enterprise Development Centre at DICs", desc: "Your Local Business Growth Partner in all 33 Districts for mentoring and market research.", icon: MapPin, agency: "NiMSME", color: "from-orange-500 to-orange-600", bgLight: "bg-orange-50", textColor: "text-orange-600" },
-    { id: "design", title: "Center of Design Excellence", desc: "Future-Proofing Manufacturing with technology roadmaps for thrust sectors.", icon: Cpu, agency: "IIT Hyderabad", color: "from-violet-500 to-violet-600", bgLight: "bg-violet-50", textColor: "text-violet-600" },
-    { id: "import", title: "Import Substitution & Export", desc: "Identifying 20 products to manufacture locally and handholding 50 MSMEs for exports.", icon: Factory, agency: "TGTPC", color: "from-rose-500 to-rose-600", bgLight: "bg-rose-50", textColor: "text-rose-600" },
-    { id: "revival", title: "Reviving Distressed MSMEs", desc: "MSME Health Clinic & Turnaround Support preventing NPA status for 108 sick MSMEs.", icon: TrendingUp, agency: "TIHCL", color: "from-emerald-500 to-emerald-600", bgLight: "bg-emerald-50", textColor: "text-emerald-600" },
-    { id: "green", title: "Greening MSMEs", desc: "Helping 2,000+ MSMEs adopt low-carbon technologies and green financing.", icon: Leaf, agency: "RICH", color: "from-teal-500 to-teal-600", bgLight: "bg-teal-50", textColor: "text-teal-600" },
-    { id: "shg", title: "SHGs & Startups to MSMEs", desc: "Promoting self-help groups and grassroots startups into formal MSME sectors.", icon: Users, agency: "ALEAP", color: "from-cyan-500 to-cyan-600", bgLight: "bg-cyan-50", textColor: "text-cyan-600" },
-    { id: "women", title: "Women Acceleration Program", desc: "Supporting 140 women-owned startups to achieve 2x business growth.", icon: Rocket, agency: "WE Hub", color: "from-fuchsia-500 to-fuchsia-600", bgLight: "bg-fuchsia-50", textColor: "text-fuchsia-600" },
-    { id: "benchmark", title: "Benchmarking Studies", desc: "Benchmarking technology gaps in thrust sectors like Plastics, Auto, and Tooling.", icon: Target, agency: "CITD, CIPET", color: "from-indigo-500 to-indigo-600", bgLight: "bg-indigo-50", textColor: "text-indigo-600" },
-];
-
-const schemes = [
-    { name: "Udyam Registration", benefit: "Official recognition & access to all Govt subsidies.", link: "https://udyamregistration.gov.in", icon: Award },
-    { name: "ZED", benefit: "Zero Defect Zero Effect certification for quality and environment.", link: "https://zed.msme.gov.in", icon: Shield },
-    { name: "LEAN", benefit: "Enhance productivity through LEAN manufacturing practices.", link: "https://lean.msme.gov.in", icon: TrendingUp },
-    { name: "PMS", benefit: "Procurement and Marketing Support for enhanced marketability.", link: "https://msme.gov.in/procurement-and-marketing-support-scheme", icon: Target },
-    { name: "CGTMSE", benefit: "Collateral-free credit for your business expansion.", link: "https://cgtmse.in", icon: Building2 },
-    { name: "TReDS", benefit: "Resolve delayed payments by discounting invoices.", link: "https://mjsme.gov.in/treds", icon: FileText },
-    { name: "ONDC", benefit: "Take your products to a national digital marketplace.", link: "https://ondc.org", icon: Globe },
-    { name: "GeM Portal", benefit: "Sell your products directly to Government departments.", link: "https://gem.gov.in", icon: Cloud },
-];
-
-const partners = [
-    { name: "TIHCL", icon: Shield },
-    { name: "CIPET", icon: Cpu },
-    { name: "CITD", icon: Target },
-    { name: "NiMSME", icon: Award },
-    { name: "TGTPC", icon: Factory },
-    { name: "RICH", icon: Leaf },
-    { name: "WE HUB", icon: Rocket },
-    { name: "IIT Hyderabad", icon: Building2 },
-    { name: "ALEAP", icon: Users },
-    { name: "Directorate of Industries", icon: Globe },
-];
+import { interventions, schemes, partners } from "@/lib/data";
 
 /* --- Bento Card Component --- */
 function BentoCard({ card, index }: { card: typeof interventions[0]; index: number }) {
@@ -136,7 +107,13 @@ function BentoCard({ card, index }: { card: typeof interventions[0]; index: numb
                         <Icon className="w-7 h-7 text-white" />
                     </div>
                     <h4 className="text-lg font-bold mb-3 leading-snug">{card.title}</h4>
-                    <p className="text-sm text-white/90 leading-relaxed flex-grow">Agency: {card.agency}</p>
+                    <div className="text-sm text-white/90 leading-relaxed flex-grow">
+                        <p className="mb-2">Agency: {card.agency}</p>
+                        <div className="flex gap-2 items-center">
+                            {card.logo && <img src={card.logo} className="h-6 w-auto object-contain bg-white rounded p-1" />}
+                            {card.logo2 && <img src={card.logo2} className="h-6 w-auto object-contain bg-white rounded p-1" />}
+                        </div>
+                    </div>
                     <button className="mt-4 flex items-center gap-2 text-sm font-bold text-white/90 hover:text-white transition group-hover:underline">
                         Learn More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -224,9 +201,9 @@ export default function Concept1() {
             <section className="relative py-20 bg-slate-50 border-y border-slate-200 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                        <StatBlock value={2038} suffix="" label="Total Awareness Programs" delay={0} />
-                        <StatBlock value={20012} suffix="" label="Total Participants" delay={0.15} />
-                        <StatBlock value={12182} suffix="" label="Organizations Benefited" delay={0.3} />
+                        <StatBlock value={2038} suffix="" label="Total Awareness Programs" delay={0} icon={Target} />
+                        <StatBlock value={20012} suffix="" label="Total Participants" delay={0.15} icon={Users} />
+                        <StatBlock value={12182} suffix="" label="Organizations Benefited" delay={0.3} icon={Building2} />
                     </div>
                 </div>
             </section>
@@ -266,7 +243,7 @@ export default function Concept1() {
                                 <BarChart3 className="w-3.5 h-3.5" /> Feature Highlight
                             </div>
                             <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-                                Make Informed Decisions
+                                Impact
                             </h2>
                             <p className="text-xl text-blue-200/70 mb-8 leading-relaxed">
                                 Access <span className="text-white font-semibold">real-time visual dashboards</span> for district-wise and sector-wise insights. Track MSME performance, scheme utilization, and green adoption metrics all in one place.
@@ -288,9 +265,12 @@ export default function Concept1() {
                                 ))}
                             </div>
 
-                            <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-900/40 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center">
+                            <button
+                                onClick={() => window.location.href = '/dashboard'}
+                                className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-900/40 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center"
+                            >
                                 Explore Dashboard
-                                <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </motion.div>
 
@@ -385,7 +365,11 @@ export default function Concept1() {
                     <div className="flex animate-marquee hover:[animation-play-state:paused] gap-12 items-center px-4">
                         {[...partners, ...partners, ...partners].map((p, i) => (
                             <div key={i} className="flex flex-col items-center opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all shrink-0">
-                                <p.icon className="w-10 h-10 text-slate-800 mb-2" />
+                                {p.logo ? (
+                                    <img src={p.logo} alt={p.name} className="h-10 w-auto object-contain mb-2" />
+                                ) : (
+                                    <p.icon className="w-10 h-10 text-slate-800 mb-2" />
+                                )}
                                 <span className="text-xs font-bold text-slate-800">{p.name}</span>
                             </div>
                         ))}
