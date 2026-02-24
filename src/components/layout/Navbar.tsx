@@ -114,9 +114,13 @@ export default function Navbar() {
             {/* Top Utility Bar - Institutional Layer */}
             <div className="bg-slate-50 border-b border-slate-200 h-9 hidden md:flex items-center">
                 <div className="max-w-[1320px] w-full mx-auto px-6 flex justify-between items-center text-[13px] text-slate-600 font-medium">
-                    <div className="flex items-center gap-2">
-                        <img src="/TG.png" alt="Telangana State Emblem" className="h-5 w-auto object-contain opacity-[0.85]" />
-                        <span>Government of Telangana</span>
+                    <div className="flex items-center gap-4">
+                        {/* <span className="text-slate-500 font-semibold tracking-wide">Directorate of Industries</span>
+                        <div className="w-px h-3 bg-slate-300"></div>
+                        <a href="tel:1800-123-4567" className="flex items-center gap-1.5 text-emerald-700 hover:text-emerald-800 transition-colors font-bold">
+                            <Phone className="w-3.5 h-3.5" />
+                            <span>Helpline: 1800-123-4567</span>
+                        </a> */}
                     </div>
                     <div className="flex items-center gap-4">
                         <button className="hover:text-slate-900 transition-colors">Skip to main content</button>
@@ -136,28 +140,34 @@ export default function Navbar() {
                 onMouseLeave={() => setHoveredMenu(null)}
             >
                 {/* Increased vertical padding: h-[76px] -> py-4 resulting in robust height */}
-                <div className="max-w-[1320px] w-full mx-auto px-4 sm:px-6">
+                <div className="max-w-[1440px] w-full mx-auto px-6">
                     <div className="flex items-center justify-between py-4 min-h-[82px]">
 
-                        {/* Left Section: RAMP Logo & Title */}
-                        <div className="flex items-center gap-8 shrink-0 relative">
-                            {/* Visual hint for separator */}
-                            <div className="hidden lg:block absolute -right-8 h-12 w-px bg-slate-100"></div>
-
-                            {/* Slightly reduced logo size visually for balance */}
+                        {/* Left Section: RAMP Logo, Title, then Govt Logo */}
+                        <div className="flex items-center gap-6 shrink-0 pr-8 border-r border-slate-100">
+                            {/* RAMP Logo */}
                             <a href="/" className="h-[46px] flex shrink-0 items-center justify-center">
                                 <img src="/ramp.jpg" alt="RAMP Logo" className="h-full object-contain" />
                             </a>
 
-                            {/* Increased spacing between logo and text, subtitle opacity reduced */}
+                            {/* Text Label */}
                             <div className="flex flex-col justify-center shrink-0">
                                 <span className="text-[20px] font-semibold text-slate-900 leading-tight">RAMP Telangana</span>
                                 <span className="text-[13px] text-slate-500 opacity-80 leading-tight mt-1">Directorate of Industries</span>
                             </div>
+
+                            {/* Govt of TS Logo & Text */}
+                            <div className="h-[46px] flex shrink-0 items-center gap-3 border-l border-slate-100 pl-6 ml-2">
+                                <img src="/TG.png" alt="Telangana State Emblem" className="h-[40px] w-auto object-contain" />
+                                <div className="flex flex-col justify-center shrink-0">
+                                    <span className="text-[13px] font-bold text-slate-800 leading-tight">Government of</span>
+                                    <span className="text-[13px] font-bold text-slate-800 leading-tight">Telangana</span>
+                                </div>
+                            </div>
                         </div>
 
                         {/* Desktop Nav */}
-                        <nav className="hidden lg:flex items-center h-full gap-[6px] justify-end flex-1 pl-16 flex-nowrap">
+                        <nav className="hidden lg:flex items-center h-full gap-[6px] justify-end flex-1 pl-8 flex-nowrap">
                             {menuItems.map((item) => {
                                 const isHovered = hoveredMenu === item.id;
                                 const isCurrentPage = pathname === item.href || (pathname?.startsWith(item.href) && item.href !== '/');

@@ -8,6 +8,44 @@ import {
     Building2, Target, Award, Phone, Mail, ChevronRight, Search, FileText, Image as ImageIcon,
     Video, Download, Info, Home, LayoutList, ListChecks
 } from "lucide-react";
+import * as topojson from "topojson-client";
+import * as d3 from "d3-geo";
+
+const districtProgramsData: Record<string, { programs: number, participants: number, benefited: number }> = {
+    "Adilabad": { programs: 22, participants: 457, benefited: 306 },
+    "Bhadradri Kothagudem": { programs: 51, participants: 197, benefited: 13 },
+    "Hanamkonda": { programs: 17, participants: 245, benefited: 109 },
+    "Hyderabad": { programs: 330, participants: 2648, benefited: 1237 },
+    "Jagtial": { programs: 20, participants: 425, benefited: 292 },
+    "Jangaon": { programs: 22, participants: 361, benefited: 308 },
+    "Jaya Shankar": { programs: 26, participants: 418, benefited: 311 },
+    "Jogulamba Gadwal": { programs: 58, participants: 249, benefited: 44 },
+    "Kamareddy": { programs: 8, participants: 499, benefited: 262 },
+    "Karimnagar": { programs: 24, participants: 300, benefited: 212 },
+    "Khammam": { programs: 53, participants: 359, benefited: 338 },
+    "Komaram Bheem": { programs: 18, participants: 222, benefited: 197 },
+    "Mancherial": { programs: 21, participants: 310, benefited: 265 },
+    "Mahabubabad": { programs: 48, participants: 141, benefited: 111 },
+    "Mahbubnagar": { programs: 74, participants: 445, benefited: 343 },
+    "Medak": { programs: 39, participants: 290, benefited: 238 },
+    "Malkajgiri": { programs: 101, participants: 2650, benefited: 2212 },
+    "Mulugu": { programs: 19, participants: 428, benefited: 296 },
+    "Nagarkurnool": { programs: 49, participants: 475, benefited: 229 },
+    "Nalgonda": { programs: 22, participants: 767, benefited: 417 },
+    "Narayanpet": { programs: 59, participants: 175, benefited: 74 },
+    "Nirmal": { programs: 24, participants: 337, benefited: 204 },
+    "Nizamabad": { programs: 24, participants: 410, benefited: 363 },
+    "Peddapalle": { programs: 50, participants: 1012, benefited: 854 },
+    "Rajanna Sircilla": { programs: 20, participants: 261, benefited: 232 },
+    "Rangareddy": { programs: 83, participants: 759, benefited: 513 },
+    "Sangareddy": { programs: 32, participants: 780, benefited: 412 },
+    "Siddipet": { programs: 18, participants: 476, benefited: 380 },
+    "Suryapet": { programs: 29, participants: 176, benefited: 150 },
+    "Vikarabad": { programs: 13, participants: 510, benefited: 216 },
+    "Wanaparthy": { programs: 49, participants: 184, benefited: 111 },
+    "Warangal": { programs: 19, participants: 224, benefited: 109 },
+    "Yadadri": { programs: 44, participants: 604, benefited: 469 }
+};
 
 /* --- Animated Counter Hook --- */
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
@@ -128,6 +166,41 @@ function BentoCard({ card, index }: { card: typeof interventions[0]; index: numb
 
 /* --- Main Concept Component --- */
 export default function Concept1() {
+    const [mapData, setMapData] = useState<any[]>([]);
+    const [hoveredDistrict, setHoveredDistrict] = useState<any | null>(null);
+    const [isLoadingMap, setIsLoadingMap] = useState(true);
+
+    useEffect(() => {
+        const fetchMap = async () => {
+            try {
+                const response = await fetch("/data/telangana.topojson");
+                if (!response.ok) throw new Error("Failed");
+                const data = await response.json();
+                if (data && data.objects && data.objects.Telangana) {
+                    // @ts-ignore
+                    const geojson = topojson.feature(data, data.objects.Telangana) as any;
+                    const features = geojson.features || [];
+                    const width = 600;
+                    const height = 600;
+                    const proj = d3.geoMercator().fitSize([width, height], geojson);
+                    const pathGenerator = d3.geoPath().projection(proj);
+
+                    const districtsWithPaths = features.map((feature: any) => {
+                        const distName = feature.properties.Dist_Name;
+                        const stats = districtProgramsData[distName] || { programs: 0, participants: 0, benefited: 0 };
+                        return {
+                            ...feature,
+                            path: pathGenerator(feature),
+                            ...stats
+                        };
+                    });
+                    setMapData(districtsWithPaths);
+                }
+            } catch (e) { console.error(e); }
+            finally { setIsLoadingMap(false); }
+        };
+        fetchMap();
+    }, []);
 
     const heroRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -185,7 +258,7 @@ export default function Concept1() {
                     </motion.div>
 
                     <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-[#ff9933] mb-6 leading-[1.08] drop-shadow-sm">
-                        Supercharge Your Business:<br />
+                        Supercharge Your Growth:<br />
                         <span className="text-white">
                             The RAMP Telangana Initiative
                         </span>
@@ -274,52 +347,92 @@ export default function Concept1() {
                             </button>
                         </motion.div>
 
-                        {/* Dashboard Mockup */}
+                        {/* Interactive Telangana Map Section */}
                         <motion.div
                             initial={{ opacity: 0, x: 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="relative"
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative lg:h-[650px] bg-slate-900/40 rounded-3xl border border-slate-700/50 p-4 sm:p-8 backdrop-blur-xl flex flex-col items-center justify-center overflow-hidden"
                         >
-                            {/* Glow behind */}
-                            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 rounded-3xl blur-2xl" />
-
-                            {/* Browser Chrome Mockup */}
-                            <div className="relative bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50">
-                                {/* Browser Top Bar */}
-                                <div className="flex items-center gap-2 px-4 py-3 bg-slate-900/80 border-b border-slate-700/50">
-                                    <div className="flex gap-1.5">
-                                        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                                        <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                                        <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                            {isLoadingMap ? (
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+                                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Loading Interactive Map...</p>
+                                </div>
+                            ) : (
+                                <div className="relative w-full h-full flex items-center justify-center">
+                                    {/* Interaction Hint */}
+                                    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none whitespace-nowrap">
+                                        <div className="flex items-center  gap-2 px-3  rounded-full bg-slate-900/80 border border-slate-700/50 backdrop-blur-sm">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Interactive Map: Hover to explore</span>
+                                        </div>
                                     </div>
-                                    <div className="flex-1 text-center">
-                                        <div className="inline-flex items-center gap-2 bg-slate-800 rounded-lg px-4 py-1.5 text-xs text-slate-400 font-mono">
-                                            <div className="w-3 h-3 text-emerald-400">🔒</div>
-                                            dashboard.ramp-telangana.gov.in
+
+                                    <svg viewBox="0 0 600 600" className="w-full h-full max-h-[600px] drop-shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                                        {mapData.map((d: any, i: number) => {
+                                            const isHovered = hoveredDistrict?.properties?.Dist_Name === d.properties.Dist_Name;
+                                            return (
+                                                <motion.path
+                                                    key={d.properties.Dist_Name || i}
+                                                    d={d.path}
+                                                    fill={isHovered ? "#10b981" : "#334155"}
+                                                    stroke={isHovered ? "#fff" : "#475569"}
+                                                    strokeWidth={isHovered ? "2" : "0.5"}
+                                                    className="cursor-pointer transition-colors duration-200"
+                                                    onMouseEnter={() => setHoveredDistrict(d)}
+                                                    onMouseLeave={() => setHoveredDistrict(null)}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ delay: Math.min(i * 0.01, 0.4) }}
+                                                />
+                                            );
+                                        })}
+                                    </svg>
+
+                                    <AnimatePresence>
+                                        {hoveredDistrict && (
+                                            <motion.div
+                                                key={hoveredDistrict.properties.Dist_Name}
+                                                initial={{ opacity: 0, y: 5 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ duration: 0.15 }}
+                                                className="absolute top-0 right-0 sm:top-4 sm:right-4 bg-slate-900/95 border border-slate-700 p-5 rounded-2xl backdrop-blur-md shadow-2xl z-20 w-full sm:w-64 pointer-events-none"
+                                            >
+                                                <h4 className="text-xl font-black text-white mb-4 border-b border-slate-700 pb-2">
+                                                    {hoveredDistrict.properties.Dist_Name}
+                                                </h4>
+                                                <div className="space-y-3">
+                                                    {[
+                                                        { label: "Programs", val: hoveredDistrict.programs, color: "text-emerald-400" },
+                                                        { label: "Participants", val: hoveredDistrict.participants.toLocaleString(), color: "text-blue-400" },
+                                                        { label: "Benefited Organizations", val: hoveredDistrict.benefited.toLocaleString(), color: "text-amber-400" }
+                                                    ].map((stat) => (
+                                                        <div
+                                                            key={stat.label}
+                                                            className="flex justify-between items-center text-sm"
+                                                        >
+                                                            <span className="text-slate-400 font-medium">{stat.label}:</span>
+                                                            <span className={`${stat.color} font-black text-lg`}>{stat.val}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* Stats Summary Tooltip */}
+                                    <div className="absolute bottom-4 left-4 bg-slate-800/80 border border-slate-700 p-4 rounded-xl backdrop-blur text-[10px] hidden sm:block">
+                                        <p className="text-slate-400 uppercase tracking-tighter font-bold mb-1">Impact Summary</p>
+                                        <div className="flex gap-4">
+                                            <div className="flex flex-col"><span className="text-emerald-400 font-bold text-xs">HYD: 330</span><span className="text-[8px] text-slate-500 uppercase">Programs</span></div>
+                                            <div className="flex flex-col"><span className="text-blue-400 font-bold text-xs">MED: 2650</span><span className="text-[8px] text-slate-500 uppercase">Participants</span></div>
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Dashboard Image */}
-                                <img
-                                    src="/msme_dashboard_mockup.png"
-                                    alt="RAMP Telangana MSME Dashboard showing district-wise analytics and sector insights"
-                                    className="w-full h-auto"
-                                    onError={(e) => {
-                                        // Fallback gradient if image not available
-                                        const target = e.target as HTMLImageElement;
-                                        target.style.display = 'none';
-                                        if (target.parentElement) {
-                                            const fallback = document.createElement('div');
-                                            fallback.className = 'w-full aspect-[16/10] bg-gradient-to-br from-blue-900 via-slate-800 to-emerald-900 flex items-center justify-center';
-                                            fallback.innerHTML = '<div class="text-center"><div class="text-6xl mb-4">📊</div><div class="text-white font-bold text-xl">Interactive MSME Dashboard</div><div class="text-blue-300/60 text-sm mt-2">Real-time analytics & insights</div></div>';
-                                            target.parentElement.appendChild(fallback);
-                                        }
-                                    }}
-                                />
-                            </div>
+                            )}
                         </motion.div>
                     </div>
                 </div>

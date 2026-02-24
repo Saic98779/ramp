@@ -8,7 +8,10 @@ export default function Footer() {
                 <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
                     <div className="md:col-span-2">
                         <div className="flex items-center gap-4 mb-6">
-                            <img src="/ramp.jpg" alt="Govt Logo" className="w-12 h-12 bg-white rounded-lg p-1" />
+                            <div className="flex items-center gap-3">
+                                <img src="/ramp.jpg" alt="RAMP Logo" className="w-12 h-12 bg-white rounded-lg p-1" />
+                                <img src="/TG.png" alt="Govt of Telangana Logo" className="w-12 h-12 bg-white rounded-lg p-1" />
+                            </div>
                             <h2 className="text-2xl font-black text-white">RAMP Telangana</h2>
                         </div>
                         <div className="space-y-4 text-slate-500">
