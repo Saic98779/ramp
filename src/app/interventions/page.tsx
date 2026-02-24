@@ -24,7 +24,6 @@ export default function InterventionsPage() {
                                 <Database className="w-8 h-8" />
                             </div>
                             <div>
-                                <h2 className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-1">T1 Intervention</h2>
                                 <h3 className="text-3xl font-black text-slate-900">Consolidated MSME Database</h3>
                             </div>
                         </div>
@@ -136,7 +135,7 @@ export default function InterventionsPage() {
                                 <HeartPulse className="w-8 h-8" />
                             </div>
                             <div>
-                                <h2 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-1">Project 5</h2>
+                                {/* <h2 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-1">Project 5</h2> */}
                                 <h3 className="text-3xl font-black text-slate-900">Revival of Distressed MSMEs</h3>
                             </div>
                         </div>
@@ -266,7 +265,7 @@ export default function InterventionsPage() {
                                 <Microscope className="w-8 h-8" />
                             </div>
                             <div>
-                                <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-1">Project 10.II</h2>
+                                {/* <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-1">Project 10.II</h2> */}
                                 <h3 className="text-3xl font-black text-slate-900">Benchmarking Study of Technological Gaps</h3>
                             </div>
                         </div>
