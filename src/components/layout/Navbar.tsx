@@ -9,15 +9,48 @@ import {
 } from "lucide-react";
 import { interventions, schemes } from "@/lib/data";
 
-const menuItems = [
-    { id: "home", label: "Home", href: "/", icon: Home },
+const translations = {
+    EN: {
+        home: "Home",
+        about: "About RAMP",
+        interventions: "Interventions",
+        schemes: "MSME Schemes",
+        resources: "Resources",
+        media: "Media",
+        contact: "Contact Us",
+        skip: "Skip to main content",
+        governance: "Directorate of Industries",
+        portal: "RAMP Telangana",
+        sublabel: "Directorate of Industries",
+        all_schemes: "View All Schemes",
+        expandable: "Expandable section"
+    },
+    TE: {
+        home: "హోమ్",
+        about: "ర్యాంప్ గురించి",
+        interventions: "జోక్యాలు",
+        schemes: "MSME పథకాలు",
+        resources: "వనరులు",
+        media: "మీడియా",
+        contact: "సంప్రదించండి",
+        skip: "ప్రధాన కంటెంట్‌కు వెళ్లండి",
+        governance: "పరిశ్రమల డైరెక్టరేట్",
+        portal: "ర్యాంప్ తెలంగాణ",
+        sublabel: "పరిశ్రమల డైరెక్టరేట్",
+        all_schemes: "అన్ని పథకాలను చూడండి",
+        expandable: "విస్తరించదగిన విభాగం"
+    }
+};
+
+const getMenuItems = (lang: "EN" | "TE") => [
+    { id: "home", label: translations[lang].home, href: "/", icon: Home },
     {
-        id: "about", label: "About RAMP", href: "/about", icon: Info,
+        id: "about", label: translations[lang].about, href: "/about", icon: Info,
         content: (
             <div className="p-6 grid grid-cols-2 gap-6 w-[500px]">
                 <a href="/about" className="group p-4 bg-slate-50 rounded-xl hover:bg-emerald-50 transition border border-transparent hover:border-emerald-100 block">
                     <Info className="w-5 h-5 text-emerald-600 mb-2" strokeWidth={1.5} />
-                    <h4 className="font-semibold text-slate-800 group-hover:text-emerald-700">About RAMP</h4>
+                    <h4 className="font-semibold text-slate-800 group-hover:text-emerald-700">{translations[lang].about}</h4>
                     <p className="text-sm text-slate-500 mt-1">Raising and Accelerating MSME Performance overview.</p>
                 </a>
                 <a href="/about#objectives" className="group p-4 bg-slate-50 rounded-xl hover:bg-emerald-50 transition border border-transparent hover:border-emerald-100 block">
@@ -29,7 +62,7 @@ const menuItems = [
         )
     },
     {
-        id: "interventions", label: "Interventions", href: "/interventions", icon: LayoutList,
+        id: "interventions", label: translations[lang].interventions, href: "/interventions", icon: LayoutList,
         content: (
             <div className="p-6 w-[800px]">
                 <h3 className="text-sm font-semibold text-slate-400 capitalize tracking-wide mb-4">Strategic Pillars & Agencies</h3>
@@ -52,7 +85,7 @@ const menuItems = [
         )
     },
     {
-        id: "schemes", label: "MSME Schemes", href: "/schemes", icon: FileText, highlight: true,
+        id: "schemes", label: translations[lang].schemes, href: "/schemes", icon: FileText, highlight: true,
         content: (
             <div className="p-6 w-[700px]">
                 <div className="grid grid-cols-2 gap-4">
@@ -69,14 +102,14 @@ const menuItems = [
                     ))}
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-100 text-center">
-                    <a href="/#schemes" className="text-[14px] font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">View All Schemes &rarr;</a>
+                    <a href="/#schemes" className="text-[14px] font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">{translations[lang].all_schemes} &rarr;</a>
                 </div>
             </div>
         )
     },
-    { id: "resources", label: "Resources", href: "/resources", icon: Download },
+    { id: "resources", label: translations[lang].resources, href: "/resources", icon: Download },
     {
-        id: "media", label: "Media", href: "/media", icon: ImageIcon,
+        id: "media", label: translations[lang].media, href: "/media", icon: ImageIcon,
         content: (
             <div className="p-6 grid grid-cols-2 gap-6 w-[400px]">
                 <a href="/media#photos" className="group p-4 bg-slate-50 rounded-xl hover:bg-emerald-50 transition border border-transparent hover:border-emerald-100 block">
@@ -92,14 +125,20 @@ const menuItems = [
             </div>
         )
     },
-    { id: "contact", label: "Contact Us", href: "/contact", icon: Phone }
+    { id: "contact", label: translations[lang].contact, href: "/contact", icon: Phone }
 ];
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
+    const [fontSizeScale, setFontSizeScale] = useState(1);
+    const [lang, setLang] = useState<"EN" | "TE">("EN");
+    const [visitorCount, setVisitorCount] = useState<number | null>(null);
     const pathname = usePathname();
+
+    const menuItems = getMenuItems(lang);
+    const t = translations[lang];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -109,60 +148,107 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        const BASE = "https://metaverseedu.in/workflow1/visitor-count";
+        const fetchCount = () =>
+            fetch(`${BASE}/get`)
+                .then(r => r.json())
+                .then(data => {
+                    const count = data?.data?.totalCount ?? data?.totalCount ?? data?.count ?? null;
+                    if (count !== null) setVisitorCount(Number(count));
+                })
+                .catch(() => {/* silently ignore */ });
+
+        // Increment on every visit, then refresh the display count
+        fetch(`${BASE}/update`, { method: "PUT" })
+            .catch(() => {/* ignore update errors */ })
+            .finally(() => fetchCount());
+    }, []);
+
+    // Accessibility: Reset Font Size
+    const resetFontSize = () => {
+        setFontSizeScale(1);
+        document.documentElement.style.setProperty('--font-scale', '1');
+    };
+
+    // Accessibility: Adjust Font Size
+    const adjustFontSize = (increment: number) => {
+        setFontSizeScale(prev => {
+            const newScale = Math.round(Math.min(Math.max(prev + increment, 0.8), 1.2) * 10) / 10;
+            document.documentElement.style.setProperty('--font-scale', newScale.toString());
+            return newScale;
+        });
+    };
+
+    // Accessibility: Skip to Content
+    const scrollToMain = () => {
+        const interventions = document.getElementById("interventions");
+        if (interventions) {
+            interventions.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    // Language Toggle
+    const toggleLang = () => {
+        setLang(prev => (prev === "EN" ? "TE" : "EN"));
+    };
+
     return (
         <React.Fragment>
             {/* Top Utility Bar - Institutional Layer */}
-            <div className="bg-slate-50 border-b border-slate-200 h-9 hidden md:flex items-center">
-                <div className="max-w-[1320px] w-full mx-auto px-6 flex justify-between items-center text-[13px] text-slate-600 font-medium">
-                    <div className="flex items-center gap-4">
-                        {/* <span className="text-slate-500 font-semibold tracking-wide">Directorate of Industries</span>
-                        <div className="w-px h-3 bg-slate-300"></div>
-                        <a href="tel:1800-123-4567" className="flex items-center gap-1.5 text-emerald-700 hover:text-emerald-800 transition-colors font-bold">
-                            <Phone className="w-3.5 h-3.5" />
-                            <span>Helpline: 1800-123-4567</span>
-                        </a> */}
+            <div className={`bg-slate-50 border-b border-slate-200 h-9 hidden md:flex items-center z-[60] 
+                ${fontSizeScale !== 1 ? "sticky top-0 shadow-sm" : ""}`}>
+                <div className="w-full px-5 flex justify-between items-center text-[13px] text-slate-600 font-medium no-scale">
+                    <div className="flex items-center gap-3">
+                        <span className="flex items-center gap-1.5 text-slate-500 font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <span className="text-[12px]">Visitors: <strong className="text-slate-700">{visitorCount !== null ? visitorCount.toLocaleString() : "…"}</strong></span>
+                        </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="hover:text-slate-900 transition-colors">Skip to main content</button>
+                        <button onClick={scrollToMain} className="hover:text-slate-900 transition-colors cursor-pointer">{t.skip}</button>
                         <div className="w-px h-3 bg-slate-300"></div>
-                        <button className="hover:text-slate-900 transition-colors">A-</button>
-                        <button className="hover:text-slate-900 transition-colors">A</button>
-                        <button className="hover:text-slate-900 transition-colors">A+</button>
+                        <button onClick={() => adjustFontSize(-0.1)} className={`hover:text-slate-900 transition-colors cursor-pointer ${fontSizeScale < 1 ? "font-bold text-emerald-700" : ""}`}>A-</button>
+                        <button onClick={resetFontSize} className={`hover:text-slate-900 transition-colors cursor-pointer ${fontSizeScale === 1 ? "font-bold text-emerald-700" : ""}`}>A</button>
+                        <button onClick={() => adjustFontSize(0.1)} className={`hover:text-slate-900 transition-colors cursor-pointer ${fontSizeScale > 1 ? "font-bold text-emerald-700" : ""}`}>A+</button>
                         <div className="w-px h-3 bg-slate-300"></div>
-                        <button className="hover:text-slate-900 transition-colors">EN | TE</button>
+                        <button onClick={toggleLang} className="hover:text-slate-900 transition-colors cursor-pointer font-bold">
+                            <span className={lang === "EN" ? "text-emerald-700" : ""}>EN</span> | <span className={lang === "TE" ? "text-emerald-700" : ""}>TE</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
             {/* Main Navbar - Portal Layer */}
             <header
-                className={`bg-white sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-md" : "border-b border-slate-200"}`}
+                className={`bg-white sticky z-50 transition-all duration-300 
+                    ${fontSizeScale !== 1 ? "top-9 shadow-md" : "top-0"} 
+                    ${scrolled ? "shadow-md" : "border-b border-slate-200"}`}
                 onMouseLeave={() => setHoveredMenu(null)}
             >
                 {/* Increased vertical padding: h-[76px] -> py-4 resulting in robust height */}
-                <div className="max-w-[1440px] w-full mx-auto px-6">
-                    <div className="flex items-center justify-between py-4 min-h-[82px]">
+                <div className="w-full pl-5 pr-4 sm:pr-8">
+                    <div className="flex items-center justify-between py-4 min-h-[82px] pl-0">
 
                         {/* Left Section: RAMP Logo, Title, then Govt Logo */}
-                        <div className="flex items-center gap-6 shrink-0 pr-8 border-r border-slate-100">
+                        <div className="flex items-center gap-3 sm:gap-5 shrink-0">
                             {/* RAMP Logo */}
-                            <a href="/" className="h-[46px] flex shrink-0 items-center justify-center">
+                            <a href="/" className="h-[36px] sm:h-[52px] flex shrink-0 items-center">
                                 <img src="/ramp.jpg" alt="RAMP Logo" className="h-full object-contain" />
                             </a>
 
-                            {/* Text Label */}
-                            <div className="flex flex-col justify-center shrink-0">
-                                <span className="text-[20px] font-semibold text-slate-900 leading-tight">RAMP Telangana</span>
-                                <span className="text-[13px] text-slate-500 opacity-80 leading-tight mt-1">Directorate of Industries</span>
+                            {/* Telangana Logo */}
+                            <div className="h-[32px] sm:h-[46px] flex items-center border-l border-slate-100 pl-3 sm:pl-5 ml-1">
+                                <img src="/TG.png" alt="Telangana State Emblem" className="h-full w-auto object-contain" />
                             </div>
 
-                            {/* Govt of TS Logo & Text */}
-                            <div className="h-[46px] flex shrink-0 items-center gap-3 border-l border-slate-100 pl-6 ml-2">
-                                <img src="/TG.png" alt="Telangana State Emblem" className="h-[40px] w-auto object-contain" />
-                                <div className="flex flex-col justify-center shrink-0">
-                                    <span className="text-[13px] font-bold text-slate-800 leading-tight">Government of</span>
-                                    <span className="text-[13px] font-bold text-slate-800 leading-tight">Telangana</span>
-                                </div>
+                            {/* RAMP Telangana Text and Directorate info */}
+                            <div className="flex flex-col justify-center shrink-0 ml-1">
+                                <span className="text-[17px] sm:text-[22px] font-bold text-slate-900 leading-tight tracking-tight">{t.portal}</span>
+                                <span className="text-[12px] sm:text-[14px] text-slate-500 font-medium leading-tight">{t.sublabel}</span>
                             </div>
                         </div>
 
@@ -254,7 +340,7 @@ export default function Navbar() {
                                             </a>
                                             {item.content && (
                                                 <div className="pl-4 pb-4">
-                                                    <span className="text-xs text-slate-400">Expandable section</span>
+                                                    <span className="text-xs text-slate-400">{t.expandable}</span>
                                                 </div>
                                             )}
                                         </div>

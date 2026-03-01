@@ -26,10 +26,33 @@ body {
 }
 
 /* ─── Marquee Animation ─── */
+/* ─── Selective Font Scaling ─── */
+:root {
+  --font-scale: 1;
+}
+
+@theme inline {
+  /* Only scale "normal" text sizes. Headings (2xl+) remain fixed. */
+  --text-xs: calc(0.75rem * var(--font-scale));
+  --text-sm: calc(0.875rem * var(--font-scale));
+  --text-base: calc(1rem * var(--font-scale));
+  --text-lg: calc(1.125rem * var(--font-scale));
+  --text-xl: calc(1.25rem * var(--font-scale));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.no-scale {
+  --font-scale: 1 !important;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }

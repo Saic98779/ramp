@@ -79,7 +79,7 @@ function StatBlock({ value, suffix, label, delay, icon: Icon }: { value: number;
                     <Icon className="w-6 h-6" strokeWidth={2} />
                 </div>
             )}
-            <div className="text-5xl md:text-6xl font-black text-blue-900 mb-3 tracking-tight">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-black text-blue-900 mb-3 tracking-tight">
                 {count.toLocaleString()}<span className="text-emerald-500">{suffix}</span>
             </div>
             <div className="text-sm font-bold text-slate-500 uppercase tracking-widest">{label}</div>
@@ -228,7 +228,7 @@ export default function Concept1() {
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 overflow-x-hidden">
 
             {/* --- HERO SECTION --- */}
-            <section ref={heroRef} id="hero" className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+            <section ref={heroRef} id="hero" className="relative min-h-[85vh] md:min-h-[92vh] flex items-center justify-center overflow-hidden">
                 {/* Background Layers */}
                 <motion.div style={{ scale: heroScale }} className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900" />
@@ -257,21 +257,21 @@ export default function Concept1() {
                         World Bank Supported &bull; Central Sector Scheme
                     </motion.div>
 
-                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-[#ff9933] mb-6 leading-[1.08] drop-shadow-sm">
+                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-[#ff9933] mb-6 leading-[1.1] drop-shadow-sm">
                         Supercharge Your Growth:<br />
                         <span className="text-white">
                             The RAMP Telangana Initiative
                         </span>
                     </motion.h1>
 
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-xl md:text-2xl text-[#138808] mb-10 max-w-3xl mx-auto font-black shadow-2xl bg-white/95 backdrop-blur-md px-8 py-5 rounded-2xl border border-slate-100/50">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg sm:text-xl md:text-2xl text-[#138808] mb-8 md:mb-10 max-w-3xl mx-auto font-bold md:font-black shadow-2xl bg-white/95 backdrop-blur-md px-6 py-4 sm:px-8 sm:py-5 rounded-xl sm:rounded-2xl border border-slate-100/50">
                         Empowering MSMEs with targeted interventions, rapid formalization, technology, funding, and global access.
                     </motion.p>
                 </div>
             </section>
 
             {/* --- IMPACT TICKER --- */}
-            <section className="relative py-20 bg-slate-50 border-y border-slate-200 overflow-hidden">
+            <section className="relative py-12 md:py-20 bg-slate-50 border-y border-slate-200 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                         <StatBlock value={2038} suffix="" label="Total Awareness Programs" delay={0} icon={Target} />
@@ -282,7 +282,7 @@ export default function Concept1() {
             </section>
 
             {/* --- INTERVENTIONS MEGA-GRID --- */}
-            <section id="interventions" className="py-24 bg-white">
+            <section id="interventions" className="py-16 md:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Core Interventions</h2>
@@ -298,7 +298,7 @@ export default function Concept1() {
             </section>
 
             {/* --- INTERACTIVE MSME DASHBOARD --- */}
-            <section id="dashboard" className="py-24 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 relative overflow-hidden">
+            <section id="dashboard" className="py-16 md:py-24 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 relative overflow-hidden">
                 {/* Decorative Orbs */}
                 <div className="absolute top-0 right-[20%] w-96 h-96 bg-blue-500/10 rounded-full blur-[150px]" />
                 <div className="absolute bottom-0 left-[10%] w-80 h-80 bg-emerald-500/10 rounded-full blur-[120px]" />
@@ -439,7 +439,7 @@ export default function Concept1() {
             </section>
 
             {/* --- SCHEME DISCOVERY HUB --- */}
-            <section id="scheme-hub" className="py-24 bg-slate-50 border-t border-slate-200">
+            <section id="scheme-hub" className="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                         <div>
@@ -494,12 +494,12 @@ export default function Concept1() {
 
             {/* --- FLOATING ACTION BUTTONS --- */}
             <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-                <button className="h-12 px-6 bg-white text-blue-700 font-bold rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.1)] border border-blue-100 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2 text-sm max-w-fit self-end group">
+                <a href="/programs" className="h-12 px-6 bg-white text-blue-700 font-bold rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.1)] border border-blue-100 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2 text-sm max-w-fit self-end group">
                     <Search className="w-4 h-4 group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">Find Your Program</span>
-                </button>
-                <button className="h-14 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all flex items-center gap-2 text-sm max-w-fit self-end group">
+                </a>
+                <a href="/register" className="h-14 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all flex items-center gap-2 text-sm max-w-fit self-end group">
                     <Zap className="w-5 h-5 group-hover:scale-110 transition-transform" /> <span>Register Yourself</span>
-                </button>
+                </a>
             </div>
         </div>
     );
