@@ -135,13 +135,13 @@ const supportCards = [
         textColor: "text-teal-600",
     },
     {
-        icon: Rocket,
-        title: "Women Acceleration Program",
-        front: "WE HUB supporting 140 women-owned startups over 4 years to achieve 2x business growth.",
-        back: "140 women-owned startups across 4 cohorts. Mentorship, market access & funding linkages targeting 2x revenue growth.",
-        color: "from-fuchsia-500 to-fuchsia-600",
-        bgLight: "bg-fuchsia-50",
-        textColor: "text-fuchsia-600",
+        icon: Users,
+        title: "SHGs & Startups to MSMEs",
+        front: "Promoting self-help groups and grassroots startups into formal MSME sectors.",
+        back: "Empowering 1,500 SHGs and 500 startups to transition into formal MSMEs with mentorship and market access.",
+        color: "from-cyan-500 to-cyan-600",
+        bgLight: "bg-cyan-50",
+        textColor: "text-cyan-600",
     },
     {
         icon: Globe,
@@ -163,7 +163,7 @@ const partners = [
     { name: "NIMSME", icon: Award },
     { name: "TSTPC", icon: Factory },
     { name: "RICH", icon: Leaf },
-    { name: "WE HUB", icon: Rocket },
+    { name: "ALEAP", icon: Users },
 ];
 
 /* ──────────────────── Bento Card Component ──────────────────── */
@@ -674,7 +674,7 @@ export default function Concept2() {
                         <div>
                             <h5 className="font-bold text-white mb-5 uppercase tracking-widest text-xs">Programs</h5>
                             <ul className="space-y-3">
-                                {["WE Hub Acceleration", "NSE EMERGE", "Green Audits", "Export Champions", "EDC Locator"].map((l, i) => (
+                                {["ALEAP Support Grid", "NSE EMERGE", "Green Audits", "Export Champions", "EDC Locator"].map((l, i) => (
                                     <li key={i}>
                                         <a href="#" className="hover:text-white transition">{l}</a>
                                     </li>

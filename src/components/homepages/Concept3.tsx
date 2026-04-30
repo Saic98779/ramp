@@ -30,7 +30,7 @@ export default function Concept3() {
 
     const personaContent = {
         artisan: {
-            title: "Women Entrepreneurs & Artisans",
+            title: "ALEAP Founders & Artisans",
             tagline: "Breaking barriers, building legacies.",
             description: "A customized pathway to formalize your craft, gain institutional mentoring, and connect to global supply chains through the state apparatus.",
             theme: "from-[#8B4513] to-[#D2691E]", // Warm amber/terracotta
@@ -38,9 +38,9 @@ export default function Concept3() {
             accent: "text-[#D2691E]",
             tabs: [
                 {
-                    title: "WE Hub Acceleration",
+                    title: "ALEAP Support Grid",
                     icon: <Sparkles className="w-5 h-5" />,
-                    content: "The flagship capacity building program. We take 45 women-led enterprises per district through a dramatic 6-month scale-up incubator, focusing on B2B procurement, financial literacy, and digital market linkages."
+                    content: "The flagship capacity building program by ALEAP. We take 45 women-led enterprises per district through a dramatic 6-month scale-up incubator, focusing on B2B procurement, financial literacy, and digital market linkages."
                 },
                 {
                     title: "Centre of Design Excellence",
@@ -164,7 +164,7 @@ export default function Concept3() {
                                 <Users className="w-7 h-7" />
                             </div>
                             <h3 className={`font-black text-2xl mb-2 font-serif ${activePersona === "artisan" ? "text-amber-400" : "text-white"}`}>Founder<br />& Artisan</h3>
-                            <p className={`text-sm tracking-wide font-medium mt-auto ${activePersona === "artisan" ? "text-amber-200/70" : "text-white/40"}`}>Women-led & Micro</p>
+                            <p className={`text-sm tracking-wide font-medium mt-auto ${activePersona === "artisan" ? "text-amber-200/70" : "text-white/40"}`}>ALEAP Supported</p>
                         </button>
 
                         <button
@@ -273,7 +273,7 @@ export default function Concept3() {
                         {[
                             { title: 'State Project Implementing Unit (SPIU)', desc: 'The apex body managing World Bank fund allocation and tracking overall progress.', icon: <CheckCircle className="w-6 h-6" /> },
                             { title: 'Enterprise Dev Centers (EDCs)', desc: 'Physical hubs across all 33 districts providing localized, offline handholding and claim settlement.', icon: <MapPin className="w-6 h-6" /> },
-                            { title: 'WE Hub Accelerator', desc: 'Specialized incubator driving cohort-based growth for female founders.', icon: <Users className="w-6 h-6" /> },
+                            { title: 'ALEAP Support', desc: 'Specialized incubator driving cohort-based growth for female founders and startups.', icon: <Users className="w-6 h-6" /> },
                             { title: 'National Stock Exchange (NSE)', desc: 'Providing the EMERGE pathway for proven formal MSMEs to raise massive public capital.', icon: <TrendingUp className="w-6 h-6" /> }
                         ].map((partner, idx) => (
                             <div key={idx} className="bg-[#FAFAFA] border border-slate-200 p-8 rounded-3xl hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
@@ -310,7 +310,7 @@ export default function Concept3() {
                                 </div>
                                 <div className="absolute bottom-12 left-12 right-12 z-10">
                                     <div className="flex items-center gap-3 mb-4">
-                                        <span className="bg-teal-600 text-white text-[10px] uppercase font-black tracking-widest px-3 py-1.5 rounded-sm">WE Hub Cohort 1</span>
+                                        <span className="bg-teal-600 text-white text-[10px] uppercase font-black tracking-widest px-3 py-1.5 rounded-sm">ALEAP Cohort 1</span>
                                         <span className="text-white/60 font-bold text-xs uppercase tracking-widest"><MapPin className="w-3 h-3 inline pb-0.5" /> Warangal District</span>
                                     </div>
                                     <h4 className="text-4xl lg:text-5xl font-serif font-black leading-tight max-w-3xl drop-shadow-md">"The RAMP mentoring gave our rural handloom unit the digital linkages needed to export directly."</h4>
@@ -365,7 +365,7 @@ export default function Concept3() {
                         <div>
                             <h4 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-6 border-b border-white/10 pb-4">Pathways</h4>
                             <ul className="space-y-4">
-                                <li><a href="#" className="hover:text-teal-400 transition">For Women Founders</a></li>
+                                <li><a href="#" className="hover:text-teal-400 transition">For ALEAP Founders</a></li>
                                 <li><a href="#" className="hover:text-teal-400 transition">For Formal MSMEs</a></li>
                                 <li><a href="#" className="hover:text-white/50 text-white/30 cursor-not-allowed">For Artisans (Soon)</a></li>
                                 <li><a href="#" className="hover:text-teal-400 transition">SPIU Admin Login</a></li>
@@ -374,7 +374,7 @@ export default function Concept3() {
                         <div>
                             <h4 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-6 border-b border-white/10 pb-4">Interventions</h4>
                             <ul className="space-y-4">
-                                <li><a href="#" className="hover:text-teal-400 transition">WE Hub Cohorts</a></li>
+                                <li><a href="#" className="hover:text-teal-400 transition">ALEAP Cohorts</a></li>
                                 <li><a href="#" className="hover:text-teal-400 transition">NSE Emerge Listing</a></li>
                                 <li><a href="#" className="hover:text-teal-400 transition">Green Auditing</a></li>
                                 <li><a href="#" className="hover:text-teal-400 transition">Design Excellence</a></li>

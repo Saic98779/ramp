@@ -11,7 +11,6 @@ export const interventions = [
     { id: "revival", title: "Reviving Distressed MSMEs", desc: "MSME Health Clinic & Turnaround Support preventing NPA status for 108 sick MSMEs.", icon: TrendingUp, agency: "TIHCL", logo: "/tihcl.jpeg", color: "from-emerald-500 to-emerald-600", bgLight: "bg-emerald-50", textColor: "text-emerald-600" },
     { id: "green", title: "Greening MSMEs", desc: "Helping 2,000+ MSMEs adopt low-carbon technologies and green financing.", icon: Leaf, agency: "RICH", logo: "/rich.jpeg", color: "from-teal-500 to-teal-600", bgLight: "bg-teal-50", textColor: "text-teal-600" },
     { id: "shg", title: "SHGs & Startups to MSMEs", desc: "Promoting self-help groups and grassroots startups into formal MSME sectors.", icon: Users, agency: "ALEAP", logo: "/aleap.jpeg", color: "from-cyan-500 to-cyan-600", bgLight: "bg-cyan-50", textColor: "text-cyan-600" },
-    { id: "women", title: "Women Acceleration Program", desc: "Supporting 140 women-owned startups to achieve 2x business growth.", icon: Rocket, agency: "WE Hub", logo: "/we-hub.jpeg", color: "from-fuchsia-500 to-fuchsia-600", bgLight: "bg-fuchsia-50", textColor: "text-fuchsia-600" },
     { id: "benchmark", title: "Benchmarking Studies", desc: "Benchmarking technology gaps in thrust sectors like Plastics, Auto, and Tooling.", icon: Target, agency: "CITD, CIPET", logo: "/CITD.jpeg", logo2: "/cipet.jpeg", color: "from-indigo-500 to-indigo-600", bgLight: "bg-indigo-50", textColor: "text-indigo-600" },
 ];
 
@@ -33,7 +32,6 @@ export const partners = [
     { name: "NiMSME", icon: Award, logo: "/ni-msme.jpeg" },
     { name: "TGTPC", icon: Factory, logo: null },
     { name: "RICH", icon: Leaf, logo: "/rich.jpeg" },
-    { name: "WE HUB", icon: Rocket, logo: "/we-hub.jpeg" },
     { name: "IIT Hyderabad", icon: Building2, logo: null },
     { name: "ALEAP", icon: Users, logo: "/aleap.jpeg" },
     { name: "Directorate of Industries", icon: Globe, logo: null },

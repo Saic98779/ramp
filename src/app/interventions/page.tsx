@@ -681,24 +681,24 @@ export default function InterventionsPage() {
                         </div>
                     </section>
 
-                    {/* Women Acceleration Program */}
-                    <section id="women" className="scroll-mt-24 pt-16 border-t border-slate-100">
+                    {/* ALEAP - SHGs & Startups */}
+                    <section id="shg" className="scroll-mt-24 pt-16 border-t border-slate-100">
                         <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
-                            <div className="w-16 h-16 rounded-2xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600 shrink-0">
+                            <div className="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center text-cyan-600 shrink-0">
                                 <Users className="w-8 h-8" />
                             </div>
                             <div>
-                                <h2 className="text-sm font-bold text-fuchsia-600 uppercase tracking-widest mb-1">Inclusivity</h2>
-                                <h3 className="text-3xl font-black text-slate-900">Women Acceleration Program</h3>
+                                <h2 className="text-sm font-bold text-cyan-600 uppercase tracking-widest mb-1">Inclusivity</h2>
+                                <h3 className="text-3xl font-black text-slate-900">SHGs & Startups to MSMEs</h3>
                             </div>
                         </div>
 
-                        <div className="bg-fuchsia-50/50 rounded-2xl p-6 mb-8 border border-fuchsia-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
+                        <div className="bg-cyan-50/50 rounded-2xl p-6 mb-8 border border-cyan-100/50 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <img src="/we-hub.jpeg" alt="WE HUB" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
+                                <img src="/aleap.jpeg" alt="ALEAP" className="w-12 h-12 rounded-lg object-contain bg-white border border-slate-200 p-1" />
                                 <div>
                                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Implementing Agency</p>
-                                    <p className="text-slate-800 font-medium">WE HUB</p>
+                                    <p className="text-slate-800 font-medium">ALEAP</p>
                                 </div>
                             </div>
                         </div>
@@ -724,7 +724,7 @@ export default function InterventionsPage() {
                         <div className="grid md:grid-cols-2 gap-8 mb-10">
                             <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <Target className="w-6 h-6 text-fuchsia-500" />
+                                    <Target className="w-6 h-6 text-cyan-500" />
                                     <h4 className="text-lg font-bold text-slate-900">Objectives</h4>
                                 </div>
                                 <ul className="space-y-4">
@@ -736,7 +736,7 @@ export default function InterventionsPage() {
                                         "Provide platforms to SHGs to diversify into export markets."
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-start gap-3">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 mt-2 shrink-0"></div>
+                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0"></div>
                                             <p className="text-sm text-slate-600">{item}</p>
                                         </li>
                                     ))}
@@ -772,7 +772,7 @@ export default function InterventionsPage() {
                             <h4 className="text-xl font-bold mb-6 relative z-10">Core Targets & Budget</h4>
                             <div className="grid sm:grid-cols-2 gap-6 relative z-10">
                                 <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10 flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-lg bg-fuchsia-500/20 flex items-center justify-center text-fuchsia-300">
+                                    <div className="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-300">
                                         <Target className="w-6 h-6" />
                                     </div>
                                     <div>
