@@ -168,7 +168,7 @@ export default function ProgramsPage() {
         setError(null);
         try {
             const res = await fetch(
-                `http://metaverseedu.in/workflow1/agency/programs/by/status/-1?status=${statusFilter}&page=${page}&size=${PAGE_SIZE}&sort=programId%2Cdesc`
+                `https://metaverseedu.in/workflow1/agency/programs/by/status/-1?status=${statusFilter}&page=${page}&size=${PAGE_SIZE}&sort=programId%2Cdesc`
             );
             if (!res.ok) throw new Error("Failed to load programs");
             const json = await res.json();
